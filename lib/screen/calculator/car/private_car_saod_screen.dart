@@ -158,13 +158,23 @@ class _PrivateCarSAODScreenState extends State<PrivateCarSAODScreen> {
                     title: "OD Discount",
                     controller: two.odPremiumController.value,
                     keyboard: TextInputType.number,
-                    validator: (value) {
-                      final intValue = int.tryParse(value ?? "0");
-                      if (intValue == null || intValue < 0 || intValue > 100) {
-                        return 'Value must be between 0 and 100';
+                    onchage: (value) {
+                        if (value.isEmpty) return;
+                        double? number = double.tryParse(value);
+                        if (number != null) {
+                          if (number > 100) {
+                            two.odPremiumController.value.text = "100";
+                            two.odPremiumController.value.selection = TextSelection.fromPosition(
+                              TextPosition(offset: two.odPremiumController.value.text.length),
+                            );
+                          } else if (number < 0) {
+                            two.odPremiumController.value.text = "0";
+                            two.odPremiumController.value.selection = TextSelection.fromPosition(
+                              TextPosition(offset: two.odPremiumController.value.text.length),
+                            );
+                          }
+                        }
                       }
-                      return null;
-                    },
                   ),
                   SizedBox(height: 5,),
                   CDropDown(
