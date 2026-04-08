@@ -60,18 +60,19 @@ class _PrivateCarSAODIndexScreenState extends State<PrivateCarSAODIndexScreen> {
         cngExt = double.parse(widget.data!.cngKitValue.toString()) * 4 / 100;
       }
       basicODDis = ((basicVehicle! + cngExt!) * double.parse(widget.data!.ODDis.toString()) / 100);
+      double basicODDisBase = (basicVehicle! * double.parse(widget.data!.ODDis.toString()) / 100);
       if(widget.data?.noClaimBonus == "0 to 20%") {
-        noClaim = (basicVehicle! + cngExt! + accessories! + nonAccessories!) * 10 / 100;
+        noClaim = (basicVehicle! - basicODDisBase + accessories!) * 20 / 100;
       } else if(widget.data?.noClaimBonus == "20 to 25%") {
-        noClaim = (basicVehicle! + cngExt! + accessories! + nonAccessories!) * 12.5 / 100;
+        noClaim = (basicVehicle! - basicODDisBase + accessories!) * 25 / 100;
       } else if(widget.data?.noClaimBonus == "25 to 35%") {
-        noClaim = (basicVehicle! + cngExt! + accessories! + nonAccessories!) * 17.5 / 100;
+        noClaim = (basicVehicle! - basicODDisBase + accessories!) * 35 / 100;
       } else if(widget.data?.noClaimBonus == "35 to 45%") {
-        noClaim = (basicVehicle! + cngExt! + accessories! + nonAccessories!) * 22.5 / 100;
+        noClaim = (basicVehicle! - basicODDisBase + accessories!) * 45 / 100;
       } else if(widget.data?.noClaimBonus == "45 to 50%") {
-        noClaim = (basicVehicle! + cngExt! + accessories! + nonAccessories!) * 25 / 100;
+        noClaim = (basicVehicle! - basicODDisBase + accessories!) * 50 / 100;
       } else if(widget.data?.noClaimBonus == "50 to 50%") {
-        noClaim = (basicVehicle! + cngExt! + accessories! + nonAccessories!) * 25 / 100;
+        noClaim = (basicVehicle! - basicODDisBase + accessories!) * 50 / 100;
       }
       totalA = basicVehicle! - basicODDis! + cngExt! + accessories! - noClaim!;
 
