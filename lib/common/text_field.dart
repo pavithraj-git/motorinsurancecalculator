@@ -72,7 +72,7 @@ class CTextField extends StatelessWidget {
         if(title != '')
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 5),
-          child: Text(title),
+          child: Text(title,style: TextStyle(fontWeight: FontWeight.bold, color: ColorConstant.baseColor)),
         ),
         TextFormField(
           readOnly: readOnly,
@@ -130,7 +130,7 @@ class CTextField extends StatelessWidget {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
               borderSide: BorderSide(
-                  color: ColorConstant.deepOrange400, width: 1.0),
+                  color: ColorConstant.baseColor, width: 1.0),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
@@ -145,7 +145,7 @@ class CTextField extends StatelessWidget {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
               borderSide: BorderSide(
-                  color: ColorConstant.deepOrange400, width: 1.0),
+                  color: ColorConstant.baseColor, width: 1.0),
             ),
             disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),

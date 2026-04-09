@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Text("Don't have an account"),
                         TextButton(onPressed: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterScreen()));
-                        }, child: Text("Register"))
+                        }, child: Text("Register", style: TextStyle(fontWeight: FontWeight.bold)))
                       ],
                     ),
 

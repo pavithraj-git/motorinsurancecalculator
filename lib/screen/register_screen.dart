@@ -145,7 +145,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                                 (Route<dynamic> route) => false,
                           );
-                        }, child: Text("Login"))
+                        }, child: Text("Login", style: TextStyle(fontWeight: FontWeight.bold)))
                       ],
                     ),
                   ],
