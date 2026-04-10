@@ -58,7 +58,7 @@ class _TrailerTPIndexScreenState extends State<TrailerTPIndexScreen> {
         SGST = totalABC * 9 / 100;
         finalTotal = totalABC + CGST + SGST;
       } else {
-        GST5 = totalABC * 5.2 / 100;
+        GST5 = totalABC * 5 / 100;
         GST18 = 0 * 18 / 100;
         finalTotal = totalABC + GST5 + GST18;
       }
