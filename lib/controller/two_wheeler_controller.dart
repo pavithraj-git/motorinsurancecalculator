@@ -19,6 +19,32 @@ class TwoWheelerController extends GetxController {
   List<String> noClaimBonusList = ["0", "20", "25", "35", "45", "50"];
   // List<String> tppdList = ["Yes", "No"];
   List<String> llPayedList = ["0", "50", "250"];
+  List<String> insuranceCompanyList = [
+    "ACKO GENERAL INSURANCE",
+    "BAJAJ GENERAL INSURANCE LTD",
+    "CHOLAMANDALAM MS GENERAL INSURANCE",
+    "GENERAL CENTRAL INSURANCE CO. LTD",
+    "GO DIGIT GENERAL INSURANCE LTD",
+    "HDFC ERGO GENERAL INSURANCE CO. LTD",
+    "ICICI LOMBARD GENERAL INSURANCE CO. LTD",
+    "IFFCO TOKIO GENERAL INSURANCE CO. LTD",
+    "INDUSIND GENERAL INSURANCE CO. LTD",
+    "LIBERTY GENERAL INSURANCE LTD",
+    "MAGMA GENERAL INSURANCE LTD",
+    "NATIONAL INSURANCE CO. LTD",
+    "NAVI GENERAL INSURANCE LTD",
+    "RAHEJA QBE GENERAL INSURANCE CO. LTD",
+    "ROYAL SUNDARAM GENERAL INSURANCE CO. LTD",
+    "SBI GENERAL INSURANCE CO. LTD",
+    "SHRIRAM GENERAL INSURANCE CO. LTD",
+    "TATA AIG GENERAL INSURANCE CO. LTD",
+    "THE NEW INDIA ASSURANCE CO. LTD",
+    "THE ORIENTAL INSURANCE CO. LTD",
+    "UNITED INDIA INSURANCE CO. LTD",
+    "UNIVERSAL SOMPO GENERAL INSURANCE CO. LTD",
+    "ZUNO GENERAL INSURANCE",
+    "ZURICH KOTAK GENERAL INSURANCE CO. LTD"
+  ];
 
   String? llPayed = "0";
   String? noClaimBonus = "0";
@@ -26,6 +52,7 @@ class TwoWheelerController extends GetxController {
   String? zone = "A";
   String? ageVehicle = "Upto 5 Year";
   String? depreciation = "0";
+  String? insuranceCompany = "ACKO GENERAL INSURANCE";
 
 
   final fullNameController = TextEditingController().obs;
