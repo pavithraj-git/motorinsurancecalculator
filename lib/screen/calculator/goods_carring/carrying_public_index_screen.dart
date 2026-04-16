@@ -3,6 +3,7 @@ import 'package:motorinsurancecalculator/model/two_wheeler_premium_model.dart';
 import 'package:motorinsurancecalculator/screen/calculator/vehicle_info_screen.dart';
 
 import '../../../common/color_constant.dart';
+import '../../../model/calculation_model.dart';
 
 class CarryingPublicIndexScreen extends StatefulWidget {
   String? title;
@@ -272,7 +273,37 @@ class _CarryingPublicIndexScreenState extends State<CarryingPublicIndexScreen> {
                           ),
                         ),
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen()));
+                          CalculationModel clt = CalculationModel(
+                          liability: liability,
+                          idv: idv,
+                          vehicleBasicRate: vehicleBasicRate,
+                          basicVehicle: basicVehicle,
+                          accessories: accessories,
+                          cngExt: cngExt,
+                          cngKit: cngKit,
+                          basicODPri: basicODPri,
+                          geoGrapExt: geoGrapExt,
+                          geoExt: geoExt,
+                          imt23: imt23,
+                          antiTheft: antiTheft,
+                          odBeforeDis: odBeforeDis,
+                          disOD: disODPri,
+                          odBeforeNCB: odBeforeNCB,
+                          noClaim: noClaim,
+                          netOwnDamage: netOwnDamage,
+                          totalA: totalA,
+                          zeroDep: zeroDep,
+                          totalB: totalB,
+                          llEmpPayed: llEmpPayed,
+                          tppd: tppd,
+                          totalC: totalC,
+                          totalABC: totalABC,
+                          GST5: GST5,
+                          GST: GST,
+                          cess: cess,
+                          finalTotal: finalTotal
+                          );
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen(title: widget.title, calculation: clt, value: widget.data)));
                         }, child: Text("Next", style: TextStyle(color: ColorConstant.whiteColor),)),
                   )
                 ],

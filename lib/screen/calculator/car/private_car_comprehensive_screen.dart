@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:motorinsurancecalculator/screen/calculator/car/private_car_comprehensive_index_screen.dart';
 import '../../../common/color_constant.dart';
 import '../../../controller/private_car_comprehensive_controller.dart';
-import '../../../model/private_car_saod_model.dart';
+import '../../../model/two_wheeler_premium_model.dart';
 
 class PrivateCarComprehensiveScreen extends StatefulWidget {
   String? title;
@@ -320,27 +320,27 @@ class _PrivateCarComprehensiveScreenState extends State<PrivateCarComprehensiveS
                         ),
                         onPressed: (){
                           two.emptyValueAssign();
-                          var value = PrivateCarSAODModel(
+                          var value = TwoWheelerPremiumModel(
                               fuelType: two.fuelType,
                               cc: two.cubicCapacitor,
                               zone: two.zone,
                               regDate: two.regDateController.value.text,
                               vehicleValue: two.vehicleValueController.value.text,
-                              eleAccess: two.accessoriesController.value.text,
-                              nonEleAccess: two.nonElectAccController.value.text,
-                              cngKit: two.cng,
+                              electricalAcc: two.accessoriesController.value.text,
+                              nonElectAcce: two.nonElectAccController.value.text,
+                              cngKits: two.cng,
                               cngKitValue: two.cngKitValueController.value.text,
                               noClaimBonus: two.noClaimBonus,
                               ODDis: two.odPremiumController.value.text,
                               claimPrePo: two.claimPrePo,
                               nameTra: two.nameTra,
                               nilDep: two.nilDepController.value.text,
-                              addon: two.addonController.value.text,
+                              addonCharge: two.addonController.value.text,
                               specialNPDis: two.specialNPDisController.value.text,
-                              tppdRes: two.tppdRes,
-                              paOwner: two.paOwnerController.value.text,
+                              tppd: two.tppdRes,
+                              paOwnerDriver: two.paOwnerController.value.text,
                               legalLib: two.legalLib,
-                              unnamedPA: two.unnamedPAController.value.text,
+                              paUnnamedPassenger: two.unnamedPAController.value.text,
                               specialODDis: two.specialODDisController.value.text,
                               specialTPDis: two.specialTPDisController.value.text,
                               specialDis: two.specialDisAmtController.value.text,

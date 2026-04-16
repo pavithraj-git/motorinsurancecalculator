@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:motorinsurancecalculator/screen/calculator/car/private_car_tp_index_screen.dart';
 import '../../../common/color_constant.dart';
 import '../../../controller/private_car_tp_controller.dart';
-import '../../../model/private_car_saod_model.dart';
+import '../../../model/two_wheeler_premium_model.dart';
 
 class PrivateCarTPScreen extends StatefulWidget {
   String? title;
@@ -189,17 +189,17 @@ class _PrivateCarTPScreenState extends State<PrivateCarTPScreen> {
                         ),
                         onPressed: (){
                           two.emptyValueAssign();
-                          var value = PrivateCarSAODModel(
+                          var value = TwoWheelerPremiumModel(
                             fuelType: two.fuelType,
                             cc: two.cubicCapacitor,
                             zone: two.zone,
                             regDate: two.regDateController.value.text,
-                            cngKit: two.cng,
+                            cngKits: two.cng,
                             specialNPDis: two.specialNPDisController.value.text,
-                            tppdRes: two.tppdRes,
-                            paOwner: two.paOwnerController.value.text,
+                            tppd: two.tppdRes,
+                            paOwnerDriver: two.paOwnerController.value.text,
                             legalLib: two.legalLib,
-                            unnamedPA: two.unnamedPAController.value.text,
+                            paUnnamedPassenger: two.unnamedPAController.value.text,
                             specialDis: two.specialDisAmtController.value.text,
                           );
                           Navigator.push(context, MaterialPageRoute(builder: (context) => PrivateCarTPIndexScreen(data: value, title: widget.title, bikeCC: widget.bikeCC,)));

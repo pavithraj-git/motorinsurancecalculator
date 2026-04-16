@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:motorinsurancecalculator/model/calculation_model.dart';
 import 'package:motorinsurancecalculator/model/two_wheeler_premium_model.dart';
 import 'package:motorinsurancecalculator/screen/calculator/vehicle_info_screen.dart';
 
@@ -166,7 +167,25 @@ class _TwoWheelerPremiumIndexScreenState extends State<TwoWheelerPremiumIndexScr
                           ),
                         ),
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen()));
+                          CalculationModel clt = CalculationModel(
+                              noClaim: noClaim,
+                              zeroDep: zeroDep,
+                            finalTotal: finalTotal.round().toDouble(),
+                            liability: liability,
+                            netOwnDamage: netOwnDamage,
+                            totalAB: totalAB,
+                            GST: GST,
+                            cess: cess,
+                            totalA: totalA,
+                            totalB: totalB,
+                            basicVehicle: basicVehicle,
+                            disOD: disOD,
+                            accessories: accessories,
+                            totalPremium: totalPremium,
+                            vehicleBasicRate: vehicleBasicRate,
+                            idv: idv,
+                          );
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen(title: widget.title, calculation: clt, value: widget.data)));
                         }, child: Text("Next", style: TextStyle(color: ColorConstant.whiteColor),)),
                   )
                 ],

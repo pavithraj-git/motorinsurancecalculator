@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:motorinsurancecalculator/model/private_car_saod_model.dart';
 import 'package:motorinsurancecalculator/screen/calculator/vehicle_info_screen.dart';
 
 import '../../../common/color_constant.dart';
 import '../../../controller/private_car_tp_controller.dart';
+import '../../../model/calculation_model.dart';
+import '../../../model/two_wheeler_premium_model.dart';
 
 class PrivateCarTPIndexScreen extends StatefulWidget {
   String? title;
   String? bikeCC;
-  PrivateCarSAODModel? data;
+  TwoWheelerPremiumModel? data;
   PrivateCarTPIndexScreen({super.key, this.title, this.bikeCC, this.data});
 
   @override
@@ -44,7 +45,7 @@ class _PrivateCarTPIndexScreenState extends State<PrivateCarTPIndexScreen> {
   initFun(){
     setState(() {
       vehicleAge = two.getRemaining(DateFormat("dd-MM-yyyy").parse(widget.data!.regDate!))!;
-      if(widget.data?.cngKit == "Yes"){
+      if(widget.data?.cngKits == "Yes"){
         cngKit = 60;
       }
 
@@ -55,12 +56,12 @@ class _PrivateCarTPIndexScreenState extends State<PrivateCarTPIndexScreen> {
       } else if(widget.data?.cc == "1501 - Above CC") {
         basicTP = 7897;
       }
-      if(widget.data?.tppdRes == "Yes") {
+      if(widget.data?.tppd == "Yes") {
         tppdRes = 100;
       }
-      paOwner = double.parse(widget.data!.paOwner.toString());
+      paOwner = double.parse(widget.data!.paOwnerDriver.toString());
       llDriver = 50 * double.parse(widget.data!.legalLib.toString());
-      unNamedpa = double.parse(widget.data!.unnamedPA.toString());
+      unNamedpa = double.parse(widget.data!.paUnnamedPassenger.toString());
       totalA = basicTP + paOwner + llDriver + unNamedpa + cngKit - tppdRes;
 
       CGST = totalA * 9 / 100;
@@ -147,7 +148,23 @@ class _PrivateCarTPIndexScreenState extends State<PrivateCarTPIndexScreen> {
                           ),
                         ),
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen()));
+                          CalculationModel clt =  CalculationModel(
+                          vehicleAge: vehicleAge,
+                          cngKit: cngKit,
+                          liability: basicTP,
+                          tppd: tppdRes,
+                          paOwner: paOwner,
+                          llDriver: llDriver,
+                          paUnnamed: unNamedpa,
+                          totalA: totalA,
+                          CGST: CGST,
+                          SGST: SGST,
+                          finalTotal: finalTotal,
+                          specialNPDis: specialNPDis,
+                          specialDisAmt: specialDisAmt,
+                          specialDisPrice: specialDisPrice
+                          );
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen(title: widget.title, calculation: clt, value: widget.data)));
                         }, child: Text("Next", style: TextStyle(color: ColorConstant.whiteColor),)),
                   )
                 ],

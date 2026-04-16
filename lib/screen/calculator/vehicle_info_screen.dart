@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:motorinsurancecalculator/common/text_field.dart';
 import 'package:get/get.dart';
+import 'package:motorinsurancecalculator/model/vehicle_info_model.dart';
+import 'package:pdf/src/widgets/document.dart';
 import '../../common/color_constant.dart';
 import '../../common/drap_down.dart';
 import '../../common/share_file.dart';
 import '../../controller/two_wheeler_controller.dart';
+import '../../utils/pdf_views.dart';
 
 class VehicleInfoScreen extends StatefulWidget {
-  const VehicleInfoScreen({super.key});
+  final title;
+  final vehicleInfo;
+  final value;
+  final calculation;
+  const VehicleInfoScreen({super.key, this.value, this.calculation, this. vehicleInfo, this.title});
 
   @override
   State<VehicleInfoScreen> createState() => _VehicleInfoScreenState();
@@ -232,9 +239,100 @@ class _VehicleInfoScreenState extends State<VehicleInfoScreen> {
                             ),
                           ),
                           onPressed: (){
-                            ShareFile share = ShareFile();
-                            share.createAndShareFile();
-                          }, child: Text("Share", style: TextStyle(color: ColorConstant.whiteColor),)),
+                            VehicleInfoModel vehicle = VehicleInfoModel(
+                              insuranceCompany: two.insuranceCompany,
+                              name: two.fullNameController.value.text,
+                              make: two.vehicleMakeController.value.text,
+                              model: two.vehicleModelController.value.text,
+                              regNo: two.registrationNoController.value.text,
+                              seatingCapacity: two.seatingCapacityController.value.text,
+                              zeroDep: two.zeroDep.value,
+                              rsa: two.rsa.value,
+                              consumable: two.consumable.value,
+                              enginCover: two.enginCover.value,
+                              ncb: two.ncb.value,
+                              tyreCover: two.tyreCover.value,
+                              lossKey: two.lossKey.value,
+                              courtesy: two.courtesy.value,
+                              spare: two.spare.value,
+                              returnInvoice: two.returnInvoice.value,
+                              medical: two.medical.value,
+                              dailyCash: two.dailyCash.value,
+                              roadTax: two.roadTax.value,
+                              additionalTowing: two.additionalTowing.value,
+                              vas: two.vas.value,
+                              otherCoverage: two.otherCoverController.value.text,
+                              startDate: two.startDateController.value.text,
+                              endDate: two.endDateController.value.text,
+                            );
+                            PDFViews pdf = PDFViews();
+                            if(widget.title == "Two Wheeler Premium" || widget.title == "Five Year Two Wheeler Vehicle") {
+                              pdf.twoWheelerPremiumPDF(
+                                  widget.title, vehicle, widget.value,
+                                  widget.calculation);
+                            } else if(widget.title == "Two Wheeler Passenger Carrying") {
+                              pdf.twoWheelerPassengerPDF(
+                                  widget.title, vehicle, widget.value,
+                                  widget.calculation);
+                            } else if(widget.title == "Electric one Year Two Wheeler Vehicle" || widget.title == "Electric five year Two Wheeler Vehicle"){
+                            pdf.electricTwoWheelerPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Private Car Package Policy"){
+                            pdf.privateCar1ODPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Private Car 1 year OD 3 years TP"){
+                            pdf.privateCar3ODPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Private Car Complete"){
+                            pdf.privateCarCompletePDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Electric Private Car Complete"){
+                            pdf.electricCarCompletePDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Goods Carrying Vehicle - Public" || widget.title == "Electric Goods Carrying Vehicle - Public"
+                            || widget.title == "Goods Carrying Vehicle - Private" || widget.title == "Electric Goods Carrying Vehicle - Private"){
+                            pdf.carryingPublicPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Taxi (Upto 6 Passengers)"){
+                            pdf.taxiPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Electric Taxi (Upto 6 Passengers)"){
+                            pdf.electricTaxiPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Bus (More than 6 Passengers)"){
+                            pdf.busPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Electric Bus (More than 6 Passengers)"){
+                            pdf.electricBusPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "School Bus (More than 6 Passengers)"){
+                            pdf.schoolBusPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Electric School Bus (More than 6 Passengers)"){
+                            pdf.electricSchoolBusPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Three Wheeler Goods Carrying Vehicles - Public" || widget.title == "Three Wheeler Goods Carrying Vehicles - Private"){
+                            pdf.threeWheelerGoodsPublicPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Three Wheeler PCV (upto 6 Passengers)"){
+                            pdf.threeWheelerPCVPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Three Wheeler PCV (more 6 Passengers upto 17 Passengers)"){
+                            pdf.threeWheelerPCVMorePDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "E-Rickshaw Goods Carrying Vehicle - Private"){
+                            pdf.eRickshawGoodsPrivatePDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "E-Rickshaw Goods Carrying Vehicle - Public"){
+                            pdf.eRickshawGoodsPublicPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "E-Rickshaw Passenger Carrying Vehicle"){
+                            pdf.eRickshawPassengerPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Ambulance"){
+                            pdf.ambulancePDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Hearses (Dead Body carry Vehicle)"){
+                            pdf.hearsesPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Pedestrain Controlled Agricultural Tractors"){
+                            pdf.tractorPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "MISC Vehicle"){
+                            pdf.miscPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Private Car - SAOD"){
+                            pdf.privateCarSAODPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Private Car - Comprehensive"){
+                            pdf.privateCarComprehensivePDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Private Car - Third Party"){
+                            pdf.privateCarTPPDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Trailer - Comprehensive"){
+                            pdf.trailerComprehensivePDF(widget.title, vehicle, widget.value, widget.calculation);
+                            } else if(widget.title == "Trailer - Third Party") {
+                              pdf.trailerTPPDF(
+                                  widget.title, vehicle, widget.value,
+                                  widget.calculation);
+                            }
+                           }, child: Text("Share", style: TextStyle(color: ColorConstant.whiteColor),)),
                     )
                   ],
                 ),

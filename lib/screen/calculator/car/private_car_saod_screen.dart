@@ -4,14 +4,10 @@ import 'package:motorinsurancecalculator/common/drap_down.dart';
 import 'package:motorinsurancecalculator/common/text_field.dart';
 import 'package:get/get.dart';
 import 'package:motorinsurancecalculator/model/two_wheeler_premium_model.dart';
-import 'package:motorinsurancecalculator/screen/calculator/car/private_car_complete_1od_index_screen.dart';
-import 'package:motorinsurancecalculator/screen/calculator/car/private_car_national_index_screen.dart';
 import 'package:motorinsurancecalculator/screen/calculator/car/private_car_saod_index_screen.dart';
 
 import '../../../common/color_constant.dart';
-import '../../../controller/private_car_national_controller.dart';
 import '../../../controller/private_car_saod_controller.dart';
-import '../../../model/private_car_saod_model.dart';
 
 class PrivateCarSAODScreen extends StatefulWidget {
   String? title;
@@ -271,22 +267,22 @@ class _PrivateCarSAODScreenState extends State<PrivateCarSAODScreen> {
                         ),
                         onPressed: (){
                           two.emptyValueAssign();
-                          var value = PrivateCarSAODModel(
+                          var value = TwoWheelerPremiumModel(
                             fuelType: two.fuelType,
                             cc: two.cubicCapacitor,
                             zone: two.zone,
                             regDate: two.regDateController.value.text,
                             vehicleValue: two.vehicleValueController.value.text,
-                            eleAccess: two.accessoriesController.value.text,
-                            nonEleAccess: two.nonElectAccController.value.text,
-                            cngKit: two.cng,
+                            electricalAcc: two.accessoriesController.value.text,
+                            nonElectAcce: two.nonElectAccController.value.text,
+                            cngKits: two.cng,
                             cngKitValue: two.cngKitValueController.value.text,
                             noClaimBonus: two.noClaimBonus,
                             ODDis: two.odPremiumController.value.text,
                             claimPrePo: two.claimPrePo,
                             nameTra: two.nameTra,
                             nilDep: two.nilDepController.value.text,
-                            addon: two.addonController.value.text,
+                            addonCharge: two.addonController.value.text,
                             specialNPDis: two.specialNPDisController.value.text,
                             specialDis: two.specialDisAmtController.value.text,
                           );

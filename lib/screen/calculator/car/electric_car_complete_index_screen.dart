@@ -4,6 +4,7 @@ import 'package:motorinsurancecalculator/screen/calculator/vehicle_info_screen.d
 
 import '../../../common/color_constant.dart';
 import '../../../controller/private_car_complete_controller.dart';
+import '../../../model/calculation_model.dart';
 
 class ElectricCarCompleteIndexScreen extends StatefulWidget {
   String? title;
@@ -282,7 +283,50 @@ class _ElectricCarCompleteIndexScreenState extends State<ElectricCarCompleteInde
                           ),
                         ),
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen()));
+                          CalculationModel clt = CalculationModel(
+                              liability: liability,
+                              idv: idv,
+                              vehicleBasicRate: vehicleBasicRate,
+                              basicVehicle: basicVehicle,
+                              disOD: disOD,
+                              loadingOD: loadingOD,
+                              odAfterDis: odAfterDis,
+                              accessories: accessories,
+                              nonElecAcc: nonAccessories,
+                              cngExt: cngExt,
+                              cngKit: cngKit,
+                              basicODPri: basicODPri,
+                              fiberGlass: fiberGlass,
+                              drivingTution: drivingTution,
+                              geoGrapExt: geoGrapExt,
+                              geoExt: geoExt,
+                              odBeforeDedu: odBeforeDedu,
+                              antiTheft: antiTheft,
+                              handiCap: handiCap,
+                              aai: aai,
+                              volDedu: volDedu,
+                              odBeforeNCB: odBeforeNCB,
+                              noClaim: noClaim,
+                              netOwnDamage: netOwnDamage,
+                              totalA: totalA,
+                              zeroDep: zeroDep,
+                              rsa: rsa,
+                              consumable: consumable,
+                              tyreCover: tyreCover,
+                              ncb: ncb,
+                              enginePro: enginePro,
+                              valAddService: valAddService,
+                              returnInvoice: returnInvoice,
+                              otherAddon: otherAddon,
+                              totalB: totalB,
+                              paUnnamed: paUnnamed,
+                              totalC: totalC,
+                              totalABC: totalABC,
+                              GST: GST,
+                              cess: cess,
+                              finalTotal: finalTotal
+                          );
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen(title: widget.title, calculation: clt, value: widget.data)));
                         }, child: Text("Next", style: TextStyle(color: ColorConstant.whiteColor),)),
                   )
                 ],

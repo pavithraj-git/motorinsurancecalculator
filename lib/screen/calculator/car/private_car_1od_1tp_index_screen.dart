@@ -4,6 +4,7 @@ import 'package:motorinsurancecalculator/screen/calculator/vehicle_info_screen.d
 
 import '../../../common/color_constant.dart';
 import '../../../controller/private_car_1od_1tp_controller.dart';
+import '../../../model/calculation_model.dart';
 
 class PrivateCar1OD1TPIndexScreen extends StatefulWidget {
   String? title;
@@ -199,7 +200,33 @@ class _PrivateCar1OD1TPIndexScreenState extends State<PrivateCar1OD1TPIndexScree
                           ),
                         ),
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen()));
+                          CalculationModel clt = CalculationModel(
+                          liability: liability,
+                          idv: idv,
+                          vehicleBasicRate: vehicleBasicRate,
+                          basicVehicle: basicVehicle,
+                          disOD: disOD,
+                          loadingOD: loadingOD,
+                          odAfterDis: odAfterDis,
+                          accessories: accessories,
+                          cngExt: cngExt,
+                          cngKit: cngKit,
+                          nonElecAcc: nonElecAcc,
+                          basODPrime: basODPrime,
+                          noClaim: noClaim,
+                          netOwnDamage: netOwnDamage,
+                          totalA: totalA,
+                          zeroDep: zeroDep,
+                          otherAddon: otherAddon,
+                          totalB: totalB,
+                          paUnnamed: paUnnamed,
+                          totalC: totalC,
+                          totalABC: totalABC,
+                          GST: GST,
+                          cess: cess,
+                          finalTotal: finalTotal,
+                          );
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen(title: widget.title, calculation: clt, value: widget.data)));
                         }, child: Text("Next", style: TextStyle(color: ColorConstant.whiteColor),)),
                   )
                 ],

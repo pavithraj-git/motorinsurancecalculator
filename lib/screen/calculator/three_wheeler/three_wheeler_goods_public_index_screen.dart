@@ -3,6 +3,7 @@ import 'package:motorinsurancecalculator/model/two_wheeler_premium_model.dart';
 import 'package:motorinsurancecalculator/screen/calculator/vehicle_info_screen.dart';
 
 import '../../../common/color_constant.dart';
+import '../../../model/calculation_model.dart';
 
 class ThreeWheelerGoodsPublicIndexScreen extends StatefulWidget {
   String? title;
@@ -194,7 +195,7 @@ class _ThreeWheelerGoodsPublicIndexScreenState extends State<ThreeWheelerGoodsPu
                           rowColumn("CNG/LPG Kit", cngKit.toStringAsFixed(2)),
                           rowColumn("PA to Owner Drive", widget.data?.paOwnerDriver),
                           rowColumn("LL to Paid Driver", widget.data?.llPaidDriver),
-                          rowColumn("Total Liability Premium (C)", totalB.toStringAsFixed(2)),
+                          rowColumn("Total Liability Premium (B)", totalB.toStringAsFixed(2)),
                         ],
                       ),
                     ),
@@ -226,7 +227,30 @@ class _ThreeWheelerGoodsPublicIndexScreenState extends State<ThreeWheelerGoodsPu
                           ),
                         ),
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen()));
+                          CalculationModel clt = CalculationModel(
+                          liability: liability,
+                          idv: idv,
+                          vehicleBasicRate: vehicleBasicRate,
+                          basicVehicle: basicVehicle,
+                          cngExt: cngExt,
+                          cngKit: cngKit,
+                          basicODPri: basicODPri,
+                          imt23: imt23,
+                          odBeforeDis: odBeforeDis,
+                          disOnODPre: disODPri,
+                          odBeforeNCB: odBeforeNCB,
+                          noClaim: noClaim,
+                          netOwnDamage: netOwnDamage,
+                          totalA: totalA,
+                          tppd: tppd,
+                          totalB: totalB,
+                          totalABC: totalAB,
+                          GST5: GST5,
+                          GST: GST,
+                          cess: cess,
+                          finalTotal: finalTotal
+                          );
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen(title: widget.title, calculation: clt, value: widget.data)));
                         }, child: Text("Next", style: TextStyle(color: ColorConstant.whiteColor),)),
                   )
                 ],

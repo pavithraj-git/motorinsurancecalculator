@@ -4,12 +4,13 @@ import 'package:motorinsurancecalculator/screen/calculator/vehicle_info_screen.d
 
 import '../../../common/color_constant.dart';
 import '../../../controller/trailer_comprehensive_controller.dart';
-import '../../../model/trailer_model.dart';
+import '../../../model/calculation_model.dart';
+import '../../../model/two_wheeler_premium_model.dart';
 
 class TrailerComprehensiveIndexScreen extends StatefulWidget {
   String? title;
   String? bikeCC;
-  TrailerModel? data;
+  TwoWheelerPremiumModel? data;
   TrailerComprehensiveIndexScreen({super.key, this.title, this.bikeCC, this.data});
 
   @override
@@ -80,7 +81,7 @@ class _TrailerComprehensiveIndexScreenState extends State<TrailerComprehensiveIn
       }
       totalA = trailerOD! + imt25! - basicODDis! - noClaim!;
 
-      if(widget.data?.tppdRes == "Yes") {
+      if(widget.data?.tppd == "Yes") {
         tppdRes = 200;
       }
       totalB = basicTP - tppdRes;
@@ -203,7 +204,32 @@ class _TrailerComprehensiveIndexScreenState extends State<TrailerComprehensiveIn
                           ),
                         ),
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen()));
+                          CalculationModel clt =  CalculationModel(
+                          vehicleAge: vehicleAge,
+                          trailerValue: trailerValue,
+                          vehicleBasicRate: vehicleBasicRate,
+                          liability: basicTP,
+                          trailerOD: trailerOD,
+                          imt23: imt25,
+                          basicODDis: basicODDis,
+                          noClaim: noClaim,
+                          totalA: totalA,
+                          tppd: tppdRes,
+                          totalB: totalB,
+                          totalABC: totalABC,
+                          CGST: widget.data?.vehiclePurpose == "Agricultural" ? CGST : 0,
+                          SGST: widget.data?.vehiclePurpose == "Agricultural" ? SGST : 0,
+                          GST5: widget.data?.vehiclePurpose == "Commercial" ? GST5 : 0,
+                          GST: widget.data?.vehiclePurpose == "Commercial" ? GST18 : 0,
+                          finalTotal: finalTotal,
+                          specialODDis: specialODDis,
+                          specialTPDis: specialTPDis,
+                          specialNPDis: specialNPDis,
+                          specialDisAmt: specialDisAmt,
+                          specialDisPrice: specialDisPrice
+
+                          );
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen(title: widget.title, calculation: clt, value: widget.data)));
                         }, child: Text("Next", style: TextStyle(color: ColorConstant.whiteColor),)),
                   )
                 ],

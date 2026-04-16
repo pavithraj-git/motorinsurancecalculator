@@ -4,6 +4,7 @@ import 'package:motorinsurancecalculator/screen/calculator/vehicle_info_screen.d
 
 import '../../../common/color_constant.dart';
 import '../../../controller/two_wheeler_controller.dart';
+import '../../../model/calculation_model.dart';
 
 class TwoWheelerPassengerIndexScreen extends StatefulWidget {
   String? title;
@@ -178,7 +179,31 @@ class _TwoWheelerPassengerIndexScreenState extends State<TwoWheelerPassengerInde
                           ),
                         ),
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen()));
+                          CalculationModel clt = CalculationModel(
+                          liability: liability,
+                          idv: idv,
+                          vehicleBasicRate: vehicleBasicRate,
+                          basicVehicle: basicVehicle,
+                          accessories: accessories,
+                          cngExt: cngExt,
+                          cngKit: cngKit,
+                          basicODPri: basicODPri,
+                          imt23: imt23,
+                          odBeforeDis: odBeforeDis,
+                          disOnODPre:disOnODPre,
+                          odBeforeNCB: odBeforeNCB,
+                          noClaim: noClaim,
+                          netOwnDamage: netOwnDamage,
+                          tppd: tppd,
+                          totalA: totalA,
+                          passCov: passCov,
+                          totalB: totalB,
+                          totalAB: totalAB,
+                          GST: GST,
+                          cess: cess,
+                          finalTotal: finalTotal
+                          );
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen(title: widget.title, calculation: clt, value: widget.data)));
                         }, child: Text("Next", style: TextStyle(color: ColorConstant.whiteColor),)),
                   )
                 ],

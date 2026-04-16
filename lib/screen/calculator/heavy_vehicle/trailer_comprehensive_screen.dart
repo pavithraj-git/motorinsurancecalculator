@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:motorinsurancecalculator/screen/calculator/heavy_vehicle/trailer_comprehensive_index_screen.dart';
 import '../../../common/color_constant.dart';
 import '../../../controller/trailer_comprehensive_controller.dart';
-import '../../../model/trailer_model.dart';
+import '../../../model/two_wheeler_premium_model.dart';
 
 class TrailerComprehensiveScreen extends StatefulWidget {
   String? title;
@@ -289,7 +289,7 @@ class _TrailerComprehensiveScreenState extends State<TrailerComprehensiveScreen>
                         ),
                         onPressed: (){
                           two.emptyValueAssign();
-                          var value = TrailerModel(
+                          var value = TwoWheelerPremiumModel(
                             fuelType: two.fuelType,
                             zone: two.zone,
                             vehiclePurpose: two.vehiclePurpose,
@@ -301,7 +301,7 @@ class _TrailerComprehensiveScreenState extends State<TrailerComprehensiveScreen>
                             claimPrePo: two.claimPrePo,
                             nameTra: two.nameTra,
                             specialNPDis: two.specialNPDisController.value.text,
-                            tppdRes: two.tppdRes,
+                            tppd: two.tppdRes,
                             specialODDis: two.specialODDisController.value.text,
                             specialTPDis: two.specialTPDisController.value.text,
                             specialDis: two.specialDisAmtController.value.text,

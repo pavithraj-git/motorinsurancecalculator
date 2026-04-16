@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:motorinsurancecalculator/model/private_car_saod_model.dart';
 import 'package:motorinsurancecalculator/screen/calculator/vehicle_info_screen.dart';
 
 import '../../../common/color_constant.dart';
 import '../../../controller/private_car_comprehensive_controller.dart';
+import '../../../model/calculation_model.dart';
+import '../../../model/two_wheeler_premium_model.dart';
 
 class PrivateCarComprehensiveIndexScreen extends StatefulWidget {
   String? title;
   String? bikeCC;
-  PrivateCarSAODModel? data;
+  TwoWheelerPremiumModel? data;
   PrivateCarComprehensiveIndexScreen({super.key, this.title, this.bikeCC, this.data});
 
   @override
@@ -59,14 +60,14 @@ class _PrivateCarComprehensiveIndexScreenState extends State<PrivateCarComprehen
     setState(() {
       vehicleAge = two.getRemaining(DateFormat("dd-MM-yyyy").parse(widget.data!.regDate!))!;
       vehicleBasicRate = two.vehicleBasicRateSAOD(widget.data?.regDate, widget.data?.zone, widget.data?.cc);
-      accessories = double.parse(widget.data!.eleAccess.toString()) * 4 / 100;
-      nonAccessories = double.parse(widget.data!.nonEleAccess.toString()) * vehicleBasicRate! / 100;
-      vehicleValue = (double.parse(widget.data!.vehicleValue.toString()) + double.parse(widget.data!.eleAccess.toString()) + double.parse(widget.data!.nonEleAccess.toString()));
-      basicVehicle = (double.parse(widget.data!.vehicleValue.toString()) + double.parse(widget.data!.nonEleAccess.toString())) * vehicleBasicRate! / 100;
-      if(widget.data?.cngKit == "INBUILT"){
+      accessories = double.parse(widget.data!.electricalAcc.toString()) * 4 / 100;
+      nonAccessories = double.parse(widget.data!.nonElectAcce.toString()) * vehicleBasicRate! / 100;
+      vehicleValue = (double.parse(widget.data!.vehicleValue.toString()) + double.parse(widget.data!.electricalAcc.toString()) + double.parse(widget.data!.nonElectAcce.toString()));
+      basicVehicle = (double.parse(widget.data!.vehicleValue.toString()) + double.parse(widget.data!.nonElectAcce.toString())) * vehicleBasicRate! / 100;
+      if(widget.data?.cngKits == "INBUILT"){
         cngExt = basicVehicle! * 5 / 100;
         cngKit = 60;
-      } else if(widget.data?.cngKit == "EXTERNAL"){
+      } else if(widget.data?.cngKits == "EXTERNAL"){
         cngExt = double.parse(widget.data!.cngKitValue.toString()) * 4 / 100;
         cngKit = 60;
       }
@@ -88,7 +89,7 @@ class _PrivateCarComprehensiveIndexScreenState extends State<PrivateCarComprehen
       totalA = basicVehicle! - basicODDis! + cngExt! + accessories! - noClaim!;
 
       nilDep = double.parse(widget.data!.nilDep.toString()) * vehicleValue! / 100;
-      nilDepAddon = double.parse(widget.data!.addon.toString());
+      nilDepAddon = double.parse(widget.data!.addonCharge.toString());
       totalB = nilDep! + nilDepAddon!;
 
       if(widget.data?.cc == "0 - 1000 CC") {
@@ -98,12 +99,12 @@ class _PrivateCarComprehensiveIndexScreenState extends State<PrivateCarComprehen
       } else if(widget.data?.cc == "1501 - Above CC") {
         basicTP = 7897;
       }
-      if(widget.data?.tppdRes == "Yes") {
+      if(widget.data?.tppd == "Yes") {
         tppdRes = 100;
       }
-      paOwner = double.parse(widget.data!.paOwner.toString());
+      paOwner = double.parse(widget.data!.paOwnerDriver.toString());
       llDriver = 50 * double.parse(widget.data!.legalLib.toString());
-      unNamedpa = double.parse(widget.data!.unnamedPA.toString());
+      unNamedpa = double.parse(widget.data!.paUnnamedPassenger.toString());
       totalC = basicTP + paOwner + llDriver + unNamedpa + cngKit - tppdRes;
 
       totalABC = totalA! + totalB + totalC;
@@ -159,7 +160,7 @@ class _PrivateCarComprehensiveIndexScreenState extends State<PrivateCarComprehen
                           rowColumn("Basic OD Rate", vehicleBasicRate.toString()),
                           rowColumn("Basic OD Premium", basicVehicle?.toStringAsFixed(2)),
                           rowColumn("Basic OD Discount (${widget.data?.ODDis}%)", basicODDis?.toStringAsFixed(2)),
-                          rowColumn("CNG/LPG Kit (${widget.data?.cngKit})", cngExt?.toStringAsFixed(2)),
+                          rowColumn("CNG/LPG Kit (${widget.data?.cngKits})", cngExt?.toStringAsFixed(2)),
                           rowColumn("Electrical/Electronic Accessories", accessories?.toStringAsFixed(2)),
                           rowColumn("Non Electrical Accessories", nonAccessories?.toStringAsFixed(2)),
                           rowColumn("No Claim Bonus (${widget.data?.noClaimBonus})", noClaim?.toStringAsFixed(2)),
@@ -231,7 +232,38 @@ class _PrivateCarComprehensiveIndexScreenState extends State<PrivateCarComprehen
                           ),
                         ),
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen()));
+                          CalculationModel clt =  CalculationModel(
+                          vehicleAge: vehicleAge,
+                          vehicleBasicRate: vehicleBasicRate,
+                          accessories: accessories,
+                          nonElecAcc: nonAccessories,
+                          vehicleValue: vehicleValue,
+                          basicVehicle: basicVehicle,
+                          cngExt: cngExt,
+                          cngKit: cngKit,
+                          basicODDis: basicODDis,
+                          noClaim: noClaim,
+                          totalA: totalA,
+                          nilDep: nilDep,
+                          nilDepAddon: nilDepAddon,
+                          totalB: totalB,
+                          liability: basicTP,
+                          tppd: tppdRes,
+                          paUnnamed: unNamedpa,
+                          paOwner: paOwner,
+                          llDriver: llDriver,
+                          totalC: totalC,
+                          totalABC: totalABC,
+                          CGST: CGST,
+                          SGST: SGST,
+                          finalTotal: finalTotal,
+                          specialODDis: specialODDis,
+                          specialTPDis: specialTPDis,
+                          specialNPDis: specialNPDis,
+                          specialDisAmt: specialDisAmt,
+                          specialDisPrice: specialDisPrice,
+                          );
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen(title: widget.title, calculation: clt, value: widget.data)));
                         }, child: Text("Next", style: TextStyle(color: ColorConstant.whiteColor),)),
                   )
                 ],

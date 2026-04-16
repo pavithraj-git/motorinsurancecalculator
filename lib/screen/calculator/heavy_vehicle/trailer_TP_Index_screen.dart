@@ -4,12 +4,13 @@ import 'package:motorinsurancecalculator/screen/calculator/vehicle_info_screen.d
 
 import '../../../common/color_constant.dart';
 import '../../../controller/trailer_comprehensive_controller.dart';
-import '../../../model/trailer_model.dart';
+import '../../../model/calculation_model.dart';
+import '../../../model/two_wheeler_premium_model.dart';
 
 class TrailerTPIndexScreen extends StatefulWidget {
   String? title;
   String? bikeCC;
-  TrailerModel? data;
+  TwoWheelerPremiumModel? data;
   TrailerTPIndexScreen({super.key, this.title, this.bikeCC, this.data});
 
   @override
@@ -47,7 +48,7 @@ class _TrailerTPIndexScreenState extends State<TrailerTPIndexScreen> {
       } else if(widget.data?.vehiclePurpose == "Commercial"){
         basicTP = 2485 * double.parse(widget.data!.noTrailer.toString());
       }
-      if(widget.data?.tppdRes == "Yes") {
+      if(widget.data?.tppd == "Yes") {
         tppdRes = 200;
       }
       totalB = basicTP - tppdRes;
@@ -147,7 +148,22 @@ class _TrailerTPIndexScreenState extends State<TrailerTPIndexScreen> {
                           ),
                         ),
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen()));
+                          CalculationModel clt =  CalculationModel(
+                              vehicleAge: vehicleAge,
+                              liability: basicTP,
+                              tppd: tppdRes,
+                              totalA: totalB,
+                              totalABC: totalABC,
+                              CGST: widget.data?.vehiclePurpose == "Agricultural" ? CGST : 0,
+                              SGST: widget.data?.vehiclePurpose == "Agricultural" ? SGST : 0,
+                              GST5: widget.data?.vehiclePurpose == "Commercial" ? GST5 : 0,
+                              GST: widget.data?.vehiclePurpose == "Commercial" ? GST18 : 0,
+                              finalTotal: finalTotal,
+                              specialNPDis: specialNPDis,
+                              specialDisAmt: specialDisAmt,
+                              specialDisPrice: specialDisPrice
+                          );
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen(title: widget.title, calculation: clt, value: widget.data)));
                         }, child: Text("Next", style: TextStyle(color: ColorConstant.whiteColor),)),
                   )
                 ],

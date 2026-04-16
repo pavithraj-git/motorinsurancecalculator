@@ -3,6 +3,7 @@ import 'package:motorinsurancecalculator/model/two_wheeler_premium_model.dart';
 import 'package:motorinsurancecalculator/screen/calculator/vehicle_info_screen.dart';
 
 import '../../../common/color_constant.dart';
+import '../../../model/calculation_model.dart';
 
 class MISCIndexScreen extends StatefulWidget {
   String? title;
@@ -187,7 +188,28 @@ class _MISCIndexScreenState extends State<MISCIndexScreen> {
                           ),
                         ),
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen()));
+                          CalculationModel clt =  CalculationModel(
+                          liability: liability,
+                          idv: idv,
+                          vehicleBasicRate: vehicleBasicRate,
+                          basicVehicle: basicVehicle,
+                          disOnODPre: disODPri,
+                          odAfterDis: odAfterDis,
+                          geoGrapExt: geoGrapExt,
+                          geoExt: geoExt,
+                          overCranes: overCranes,
+                          imt23: imt23,
+                          odBeforeNCB: odBeforeNCB,
+                          noClaim: noClaim,
+                          netOwnDamage: netOwnDamage,
+                          totalA: totalA,
+                          totalB: totalB,
+                          totalABC: totalAB,
+                          GST: GST,
+                          cess: cess,
+                          finalTotal: finalTotal,
+                          );
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => VehicleInfoScreen(title: widget.title, calculation: clt, value: widget.data)));
                         }, child: Text("Next", style: TextStyle(color: ColorConstant.whiteColor),)),
                   )
                 ],

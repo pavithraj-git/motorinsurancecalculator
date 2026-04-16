@@ -35,6 +35,7 @@ class CDropDown<T> extends StatelessWidget {
           child: Text(title!,style: TextStyle(fontWeight: FontWeight.bold, color: ColorConstant.baseColor)),
         ),
         DropdownButtonFormField<T>(
+            isExpanded: true,
             value: value,
             validator: validator,
             items: items,

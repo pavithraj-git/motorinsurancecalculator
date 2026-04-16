@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:motorinsurancecalculator/screen/calculator/heavy_vehicle/trailer_TP_Index_screen.dart';
 import '../../../common/color_constant.dart';
 import '../../../controller/trailer_tp_controller.dart';
-import '../../../model/trailer_model.dart';
+import '../../../model/two_wheeler_premium_model.dart';
 
 class TrailerTPScreen extends StatefulWidget {
   String? title;
@@ -162,14 +162,14 @@ class _TrailerTPScreenState extends State<TrailerTPScreen> {
                         ),
                         onPressed: (){
                           two.emptyValueAssign();
-                          var value = TrailerModel(
+                          var value = TwoWheelerPremiumModel(
                               fuelType: two.fuelType,
                               zone: two.zone,
                               vehiclePurpose: two.vehiclePurpose,
                               regDate: two.regDateController.value.text,
                               noTrailer: two.noTrailer,
                               specialNPDis: two.specialNPDisController.value.text,
-                              tppdRes: two.tppdRes,
+                              tppd: two.tppdRes,
                               specialDis: two.specialDisAmtController.value.text,
                           );
                           Navigator.push(context, MaterialPageRoute(builder: (context) => TrailerTPIndexScreen(data: value, title: widget.title, bikeCC: widget.bikeCC,)));

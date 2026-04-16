@@ -81,6 +81,26 @@ class TwoWheelerPremiumModel {
   String? medialExp;
   String? courtesyCar;
 
+  String? fuelType;
+  String? cc;
+  String? vehiclePurpose;
+  String? regDate;
+  String? noTrailer;
+  String? ODDis;
+  String? claimPrePo;
+  String? nameTra;
+  String? specialODDis;
+  String? specialTPDis;
+  String? specialNPDis;
+  String? specialDis;
+  String? trailer1;
+  String? trailer2;
+
+
+  String? vehicleValue;
+  String? cngKitValue;
+  String? legalLib;
+
   TwoWheelerPremiumModel({
     this.idv,
     this.depreciation,
@@ -162,7 +182,26 @@ class TwoWheelerPremiumModel {
     this.petCareCov,
     this.platinum,
     this.medialExp,
-    this.courtesyCar
+    this.courtesyCar,
+
+    this.fuelType,
+    this.cc,
+    this.vehiclePurpose,
+    this.regDate,
+    this.noTrailer,
+    this.ODDis,
+    this.claimPrePo,
+    this.nameTra,
+    this.specialODDis,
+    this.specialTPDis,
+    this.specialNPDis,
+    this.specialDis,
+    this.trailer1,
+    this.trailer2,
+
+    this.vehicleValue,
+    this.cngKitValue,
+    this.legalLib,
 });
 
   TwoWheelerPremiumModel.fromJson(Map<String, dynamic> map) {
@@ -246,5 +285,24 @@ class TwoWheelerPremiumModel {
     platinum = map["platinum"];
     medialExp = map["medialExp"];
     courtesyCar = map["courtesyCar"];
+
+    fuelType = map["fuelType"];
+    cc = map["cc"];
+    vehiclePurpose = map["vehiclePurpose"];
+    regDate = map["regDate"];
+    noTrailer = map["noTrailer"];
+    ODDis = map["ODDis"];
+    claimPrePo = map["claimPrePo"];
+    nameTra = map["nameTra"];
+    specialODDis = map["specialODDis"];
+    specialTPDis = map["specialTPDis"];
+    specialNPDis = map["specialNPDis"];
+    specialDis = map["specialDis"];
+    trailer1 = map["trailer1"];
+    trailer2 = map["trailer2"];
+
+    vehicleValue = map["vehicleValue"];
+    cngKitValue = map["cngKitValue"];
+    legalLib = map["legalLib"];
   }
 }
